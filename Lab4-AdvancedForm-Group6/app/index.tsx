@@ -11,6 +11,12 @@ export default function HomeScreen() {
           <Text style={styles.buttonText}>Go to Sign In Form</Text>
         </TouchableOpacity>
       </Link>
+
+      <Link href="/employee-info-form" asChild>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Go to Employee Form</Text>
+        </TouchableOpacity>
+      </Link>
     </View>
   );
 }
@@ -34,6 +40,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 22,
     paddingVertical: 14,
     borderRadius: 12,
+    width: '100%', // Makes buttons consistent width
+    alignItems: 'center',
+    marginBottom: 15,
   },
   buttonText: {
     color: "#fff",

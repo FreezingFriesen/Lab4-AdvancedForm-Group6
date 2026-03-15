@@ -1,11 +1,10 @@
-import { ScrollView, StyleSheet, Text } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 import EmployeeForm from '../components/EmployeeForm';
 
 export default function EmployeeInfoScreen() {
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Employee Registration</Text>
-      <EmployeeForm />
+      <EmployeeForm/>
     </ScrollView>
   );
 }
