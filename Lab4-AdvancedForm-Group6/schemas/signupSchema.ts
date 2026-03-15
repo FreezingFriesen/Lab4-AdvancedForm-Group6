@@ -11,9 +11,9 @@ export const signupSchema = Yup.object().shape({
     password: Yup.string()
         .min(6, 'Password must be more than 6 characters')
         .max(20, 'Password must be less than 20 characters')
-        .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])$/, 
-            "Password can only contain numbers and letters")
        .required('Password is required'),
+    //    .matches(/^(?=.*[A-Za-z0-9])+$/, 
+    //         "Password can only contain numbers and letters"),
     confirmPassword: Yup.string()
         .oneOf([Yup.ref("password")], "Passwords must match")
         .required('Please confirm your password')
