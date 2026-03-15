@@ -1,5 +1,5 @@
 
-import { StyleSheet, View, Text, TextInput, Pressable} from 'react-native';
+import { StyleSheet, View, Text, TextInput, Pressable, Alert} from 'react-native';
 
 import { signupSchema } from "@/schemas/signupSchema"
 import * as yup from "yup";
@@ -13,11 +13,16 @@ export default function SignUpScreen() {
     <View>
         <Formik 
 initialValues={{ fullName: "", email: "", password: "", confirmPassword: ""}}
-        onSubmit={(values) => {
+        onSubmit={(values, {setSubmitting}) => {
             console.log("You submitted: ", values);
+            Alert.alert("Submitted", `Values: ${values}`)
         }}
         validationSchema={signupSchema}
+        validateOnBlur={true}
+        validateOnChange={true}
+        enableReinitialize={true}
         >
+
         {({     
             values,
             errors,
@@ -37,6 +42,9 @@ initialValues={{ fullName: "", email: "", password: "", confirmPassword: ""}}
                         onBlur={handleBlur("fullName")}
                         style={styles.input}
                     />
+                    {touched.fullName && errors.fullName ? 
+                    (<Text style={styles.errorText}>{errors.fullName}</Text>) : null}
+
                 </View>
                 <View style={styles.inputGroup}>
                     <Text style={styles.label}>Email: </Text>
@@ -47,6 +55,9 @@ initialValues={{ fullName: "", email: "", password: "", confirmPassword: ""}}
                         style={styles.input}
                     />
                 </View>
+                {touched.email && errors.email ? 
+                (<Text style={styles.errorText}>{errors.email}</Text>) : null}
+
                 <View style={styles.inputGroup}>
                     <Text style={styles.label}>Password: </Text>
                     <TextInput
@@ -56,6 +67,9 @@ initialValues={{ fullName: "", email: "", password: "", confirmPassword: ""}}
                         style={styles.input}
                     />
                 </View>
+                {touched.password && errors.password ? 
+                (<Text style={styles.errorText}>{errors.password}</Text>) : null}
+
                 <View style={styles.inputGroup}> 
                     <Text style={styles.label}>Confirm Password: </Text>
                     <TextInput
@@ -65,8 +79,10 @@ initialValues={{ fullName: "", email: "", password: "", confirmPassword: ""}}
                         style={styles.input}
                     />
                 </View>
+                {touched.confirmPassword && errors.confirmPassword ? 
+                (<Text style={styles.errorText}>{errors.confirmPassword}</Text>) : null}
 
-                <Pressable onPress={() => handleSubmit()} disabled={false} 
+                <Pressable onPress={() => handleSubmit()} disabled={false}
                 style={[styles.submitButton, !isValid ? styles.submitButtonDisabled : null]}>
                     <Text style={styles.submitButtonText}>Submit</Text>
                 </Pressable>
