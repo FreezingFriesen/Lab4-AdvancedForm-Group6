@@ -26,6 +26,7 @@ initialValues={{ fullName: "", email: "", password: "", confirmPassword: ""}}
             handleBlur,
             handleSubmit,
             isSubmitting,
+            isValid,
         }) => (
             <View style={styles.form}>
                 <View style={styles.inputGroup}>
@@ -65,8 +66,9 @@ initialValues={{ fullName: "", email: "", password: "", confirmPassword: ""}}
                     />
                 </View>
 
-                <Pressable onPress={handleSubmit as any}>
-                    <Text>Submit</Text>
+                <Pressable onPress={() => handleSubmit()} disabled={false} 
+                style={[styles.submitButton, !isValid ? styles.submitButtonDisabled : null]}>
+                    <Text style={styles.submitButtonText}>Submit</Text>
                 </Pressable>
             </View>
         )}
