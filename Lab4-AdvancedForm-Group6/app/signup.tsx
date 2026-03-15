@@ -13,13 +13,16 @@ export default function SignUpScreen() {
     <View>
         <Formik 
 initialValues={{ fullName: "", email: "", password: "", confirmPassword: ""}}
-        onSubmit={(values, {setSubmitting}) => {
+        onSubmit={(values, {setSubmitting, resetForm}) => {
             console.log("You submitted: ", values);
-            Alert.alert("Submitted", `Values: ${values}`)
+
+            resetForm();
+            setSubmitting(false);
         }}
         validationSchema={signupSchema}
         validateOnBlur={true}
         validateOnChange={true}
+        validateOnMount={true}
         enableReinitialize={true}
         >
 
@@ -82,10 +85,11 @@ initialValues={{ fullName: "", email: "", password: "", confirmPassword: ""}}
                 {touched.confirmPassword && errors.confirmPassword ? 
                 (<Text style={styles.errorText}>{errors.confirmPassword}</Text>) : null}
 
-                <Pressable onPress={() => handleSubmit()} disabled={false}
-                style={[styles.submitButton, !isValid ? styles.submitButtonDisabled : null]}>
+                <Pressable onPress={() => handleSubmit()} disabled={!isValid || isSubmitting}
+                style={[styles.submitButton, !isValid || isSubmitting ? styles.submitButtonDisabled : null]}>
                     <Text style={styles.submitButtonText}>Submit</Text>
                 </Pressable>
+
             </View>
         )}
         </Formik>
