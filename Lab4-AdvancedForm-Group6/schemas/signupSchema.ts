@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-export const employeeSchema = Yup.object().shape({
+export const signupSchema = Yup.object().shape({
     fullName: Yup.string()
         .min(2, 'Name is too short') // Length validation
         .max(50, 'Name is too long')
@@ -9,11 +9,10 @@ export const employeeSchema = Yup.object().shape({
         .email('Invalid email format') // Format validation
         .required('Email is required'),
     password: Yup.string()
-        .min(2, 'Password must be more than 2 characters')
+        .min(6, 'Password must be more than 6 characters')
         .max(20, 'Password must be less than 20 characters')
         .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])$/, 
             "Password can only contain numbers and letters")
-    
        .required('Password is required'),
     confirmPassword: Yup.string()
         .oneOf([Yup.ref("password")], "Passwords must match")
