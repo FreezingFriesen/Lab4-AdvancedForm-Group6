@@ -17,13 +17,6 @@ export default function HomeScreen() {
           <Text style={styles.buttonText}>Go to Employee Form</Text>
         </TouchableOpacity>
       </Link>
-
-      <Link href="/signup" asChild>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Go to Sign Up Form</Text>
-        </TouchableOpacity>
-      </Link>
-
     </View>
   );
 }
